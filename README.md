@@ -1,7 +1,7 @@
-<H3>Enter Name</H3>
-<H3>Enter Register No.</H3>
+<H3>Enter Name :  Kishor kumar B</H3>
+<H3>Enter Register No: 212223240072 </H3>
 <H3>Experiment 2</H3>
-<H3>Date</H3>
+<H3>Date : 04.8.2026</H3>
 <h1 align =center>Implementation of Exact Inference Method of Bayesian Network</h1>
 
 ## Aim:
@@ -18,12 +18,27 @@ Step 6: Perform exact inference using the defined evidence and query variables.<
 Step 7: Print the results.<br>
 
 ## Program :
-<Type your Code here>
+```
 
+from pgmpy.models import DiscreteBayesianNetwork
+from pgmpy.factors.discrete import TabularCPD
+from pgmpy.inference import VariableElimination
 
-## Output :
-<Show the results>
+network = DiscreteBayesianNetwork([
+    ('Burglary', 'Alarm'),
+    ('Earthquake', 'Alarm'),
+    ('Alarm', 'JohnCalls'),
+    ('Alarm', 'MaryCalls')
+])
 
-## Result :
-Thus, Bayesian Inference was successfully determined using Variable Elimination Method
+cpd_burglary = TabularCPD('Burglary', 2, [[0.999], [0.001]])
+cpd_earthquake = TabularCPD('Earthquake', 2, [[0.998], [0.002]])
 
+cpd_alarm = TabularCPD(
+    'Alarm',
+    2,
+    [
+        [0.999, 0.71, 0.06, 0.05],
+        [0.001, 0.29, 0.94, 0.95]
+    ],
+    evidence=['Burglary', 'Earthquake'],
